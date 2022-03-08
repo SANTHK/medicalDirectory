@@ -1,0 +1,64 @@
+
+
+<div class="container table-container">
+  <div class="row">
+    <form class="form-inline">
+      <fieldset>
+        <label class="control-label">Search </label>
+        <input type="text" placeholder="Pateint Name" class="input-mini"  name="search" [(ngModel)]="searchText">
+      </fieldset>
+    </form>
+  </div>
+  <section>
+    <div class="row">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Is Active</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pateint of patients | search:searchText:['firstName', 'lastName'];">
+            <th scope="row">{{pateint?.patientId}}</th>
+            <td>{{pateint?.firstName}} {{pateint?.lastName}}</td>
+            <td>{{pateint?.status}}</td>
+            <td>{{pateint?.isActive}}</td>
+            <td align="center">
+              <button class="btn btn-primary btn-sm" (click)="getPatientById(pateint.patientId)">View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+</div>
+
+<div class="container" *ngIf="pateintDetails">
+  <h6>Details</h6>
+  <fieldset class="row">
+    <label class="control-label col-sm-2">Id </label>
+    <span class="control-label col-sm-4">{{pateintDetails?.patientId}}</span>
+  </fieldset>
+  <fieldset class="row">
+    <label class="control-label col-sm-2">Name </label>
+    <span class="control-label col-sm-4">{{pateintDetails?.firstName}} {{pateintDetails?.lastName}}</span>
+  </fieldset>
+  <fieldset class="row">
+    <label class="control-label col-sm-2">Date of Birth </label>
+    <span class="control-label col-sm-4">{{pateintDetails?.dateOfBirth | date : "dd-MM-yyyy"}}</span>
+  </fieldset>
+  <fieldset class="row">
+    <label class="control-label col-sm-2">Is Active  </label>
+    <span class="control-label col-sm-4">{{pateintDetails?.isActive}}</span>
+  </fieldset>
+  <fieldset class="row">
+    <label class="control-label col-sm-2">Status </label>
+    <span class="control-label col-sm-4">{{pateintDetails?.status}}</span>
+  </fieldset>
+</div>
+
